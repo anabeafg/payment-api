@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Payment API",
+    "version": "1.0.0",
+    "description": "API RESTful para gerenciamento de pagamentos."
+  },
+  "paths": {
+    "/api/payments": {
+      "get": {
+        "summary": "Listar todos os pagamentos",
+        "responses": {
+          "200": {
+            "description": "Lista de pagamentos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Payment" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar novo pagamento",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": { "type": "number" },
+                  "dueDate": { "type": "string", "format": "date-time" }
+                },
+                "required": ["amount", "dueDate"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pagamento criado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Payment" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/{id}": {
+      "get": {
+        "summary": "Obter pagamento por ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Pagamento encontrado" },
+          "404": { "description": "Pagamento não encontrado" }
+        }
+      },
+      "put": {
+        "summary": "Atualizar pagamento",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+             "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": { "type": "number" },
+                  "dueDate": { "type": "string", "format": "date-time" },
+                  "status": { "type": "string", "enum": ["pending", "paid", "cancelled", "overdue"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Pagamento atualizado" },
+          "404": { "description": "Pagamento não encontrado" }
+        }
+      }
+    },
+    "/api/payments/{id}/status": {
+      "patch": {
+        "summary": "Atualizar status do pagamento",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": { "type": "string", "enum": ["pending", "approved", "rejected"] }
+                },
+                "required": ["status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Status atualizado" },
+          "400": { "description": "Status inválido" },
+          "404": { "description": "Pagamento não encontrado" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "amount": { "type": "number" },
+          "type": { "type": "string" },
+          "status": { "type": "string" },
+          "createdDate": { "type": "string", "format": "date-time" },
+          "updatedDate": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}
