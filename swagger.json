@@ -6,23 +6,7 @@
     "description": "API RESTful para gerenciamento de pagamentos."
   },
   "paths": {
-    "/api/payments": {
-      "get": {
-        "summary": "Listar todos os pagamentos",
-        "responses": {
-          "200": {
-            "description": "Lista de pagamentos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/Payment" }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/payments/create": {
       "post": {
         "summary": "Criar novo pagamento",
         "requestBody": {
@@ -52,7 +36,25 @@
         }
       }
     },
-    "/api/payments/{id}": {
+    "/payments/list": {
+      "get": {
+        "summary": "Listar todos os pagamentos",
+        "responses": {
+          "200": {
+            "description": "Lista de pagamentos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Payment" }
+                }
+              }
+            }
+          }
+        }
+      } 
+    },
+    "/payments/list/{id}": {
       "get": {
         "summary": "Obter pagamento por ID",
         "parameters": [
@@ -62,9 +64,11 @@
           "200": { "description": "Pagamento encontrado" },
           "404": { "description": "Pagamento não encontrado" }
         }
-      },
+      }
+    },
+    "/payments/update/{id}": {
       "put": {
-        "summary": "Atualizar pagamento",
+        "summary": "Editar pagamento",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
         ],
@@ -76,8 +80,7 @@
                 "type": "object",
                 "properties": {
                   "amount": { "type": "number" },
-                  "dueDate": { "type": "string", "format": "date-time" },
-                  "status": { "type": "string", "enum": ["pending", "paid", "cancelled", "overdue"] }
+                  "dueDate": { "type": "string", "format": "date-time" }
                 }
               }
             }
@@ -89,7 +92,7 @@
         }
       }
     },
-    "/api/payments/{id}/status": {
+    "/payments/updateStatus/{id}": {
       "patch": {
         "summary": "Atualizar status do pagamento",
         "parameters": [

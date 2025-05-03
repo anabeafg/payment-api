@@ -54,7 +54,10 @@ export class PaymentController {
       const payment = await paymentService.updateStatus(req.params.id, paymentData.status);
       return res.status(200).json(payment);
     } catch (error) {
-      return res.status(404).json({ error: (error as Error).message });
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ errors: error.errors });
+        return;
+      }
     }
   }
 }

@@ -4,10 +4,10 @@ import { PaymentController } from "../controllers/paymentController";
 const router = Router();
 const controller = new PaymentController();
 
-router.get("/payments", controller.list);
-router.get("/payments/:id", controller.getById);
-router.post("/payments", controller.create);
-router.put("/payments/:id", controller.update);
-router.patch("/payments/:id/status", controller.updateStatus);
+router.post("/payments/create", controller.create);
+router.get("/payments/list", controller.list);
+router.get("/payments/list/:id", controller.getById);
+router.put("/payments/update/:id", controller.update);
+router.patch("/payments/updateStatus/:id", controller.updateStatus);
 
 export default router;
