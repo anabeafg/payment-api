@@ -127,10 +127,11 @@
         "properties": {
           "id": { "type": "string" },
           "amount": { "type": "number" },
-          "type": { "type": "string" },
           "status": { "type": "string" },
           "createdDate": { "type": "string", "format": "date-time" },
-          "updatedDate": { "type": "string", "format": "date-time" }
+          "updatedDate": { "type": "string", "format": "date-time" },
+          "dueDate": { "type": "string", "format": "date-time" },
+          "paymentDate": { "type": "string", "format": "date-time" }
         }
       }
     }

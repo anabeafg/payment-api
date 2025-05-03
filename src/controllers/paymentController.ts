@@ -9,31 +9,31 @@ import { paymentCreated, paymentUpdated } from "../events/notification/paymentNo
 const paymentService = new PaymentService();
 
 export class PaymentController {
+  async create(req: Request, res: Response) {
+    try {
+      const paymentData = createPaymentSchema.parse(req.body)
+      const payment = await paymentService.create(paymentData)
+      paymentCreated(payment)
+      return res.status(201).json(payment)
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ errors: error.errors })
+        return;
+      }
+    }
+  }
+
   async list(req: Request, res: Response) {
-    const payments = await paymentService.list();
-    return res.status(200).json(payments);
+    const payments = await paymentService.list()
+    return res.status(200).json(payments)
   }
 
   async getById(req: Request, res: Response) {
     try {
-      const payment = await paymentService.getById(req.params.id);
-      return res.status(200).json(payment);
+      const payment = await paymentService.getById(req.params.id)
+      return res.status(200).json(payment)
     } catch (error) {
-      return res.status(404).json({ error: (error as Error).message });
-    }
-  }
-
-  async create(req: Request, res: Response) {
-    try {
-      const paymentData = createPaymentSchema.parse(req.body)
-      const payment = await paymentService.create(paymentData);
-      paymentCreated(payment)
-      return res.status(201).json(payment);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        res.status(400).json({ errors: error.errors });
-        return;
-      }
+      return res.status(404).json({ error: (error as Error).message })
     }
   }
 
@@ -42,10 +42,10 @@ export class PaymentController {
       const paymentData = updatePaymentSchema.parse(req.body)
       const payment = await paymentService.update(req.params.id, paymentData)
       paymentUpdated(payment)
-      return res.status(200).json(payment);
+      return res.status(200).json(payment)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ errors: error.errors });
+        res.status(400).json({ errors: error.errors })
         return;
       }
     }
@@ -54,12 +54,12 @@ export class PaymentController {
   async updateStatus(req: Request, res: Response) {
     try {
       const paymentData = updatePaymentStatusSchema.parse(req.body)
-      const payment = await paymentService.updateStatus(req.params.id, paymentData.status);
+      const payment = await paymentService.updateStatus(req.params.id, paymentData.status)
       paymentUpdated(payment)
-      return res.status(200).json(payment);
+      return res.status(200).json(payment)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ errors: error.errors });
+        res.status(400).json({ errors: error.errors })
         return;
       }
     }

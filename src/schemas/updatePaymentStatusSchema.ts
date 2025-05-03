@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { PaymentStatus } from "../models/payment";
+import { z } from "zod"
+import { PaymentStatus } from "../models/payment"
 
 export const updatePaymentStatusSchema = z.object({
   status: z.nativeEnum(PaymentStatus, {

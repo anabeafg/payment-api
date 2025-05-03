@@ -1,4 +1,4 @@
 export interface CreatePaymentDTO {
-  amount: number;
-  dueDate: string;
+  amount: number
+  dueDate: string
 }

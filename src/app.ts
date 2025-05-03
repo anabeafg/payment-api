@@ -1,19 +1,19 @@
-import cors from "cors";
-import swaggerUi from "swagger-ui-express";
-import path from "path";
-import fs from "fs";
-import paymentRoutes from "./Routes/paymentRoutes";
-import express from "express";
-import { invalidJsonHandler } from "./middleware/invalidJsonHandler";
+import cors from "cors"
+import swaggerUi from "swagger-ui-express"
+import path from "path"
+import fs from "fs"
+import paymentRoutes from "./routes/paymentRoutes"
+import express from "express"
+import { invalidJsonHandler } from "./middleware/invalidJsonHandler"
 
-const app = express();
-const swaggerPath = path.resolve(__dirname, "..", "swagger.json");
-const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, "utf-8"));
+const app = express()
+const swaggerPath = path.resolve(__dirname, "..", "swagger.json")
+const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, "utf-8"))
 
-app.use(cors());
-app.use(express.json());
-app.use(invalidJsonHandler);
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use(paymentRoutes);
+app.use(cors())
+app.use(express.json())
+app.use(invalidJsonHandler)
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use(paymentRoutes)
 
-export default app;
+export default app

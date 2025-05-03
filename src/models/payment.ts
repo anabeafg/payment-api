@@ -6,11 +6,11 @@ export enum PaymentStatus {
 }
 
 export interface Payment {
-  id: string;
-  amount: number;
-  status: PaymentStatus;
-  createdDate: string;
-  updatedDate: string;
-  dueDate: string;
+  id: string
+  amount: number
+  status: PaymentStatus
+  createdDate: string
+  updatedDate: string
+  dueDate: string | null
   paymentDate: string | null
 }
