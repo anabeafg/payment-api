@@ -43,7 +43,7 @@ describe("Integração - API de Pagamentos", () => {
       amount: 200,
       status: "paid",
       dueDate: "2025-12-01T00:00:00.000Z"
-    };
+    }
     const response = await request(app).post("/payments/create").send(payment)
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty("id")
@@ -53,19 +53,35 @@ describe("Integração - API de Pagamentos", () => {
     const updateData = {
       amount: 300,
       dueDate: "2026-01-01T00:00:00.000Z"
-    };
+    }
     const response = await request(app).put(`/payments/update/${mockPayment.id}`).send(updateData)
     expect(response.status).toBe(200)
     expect(response.body.amount).toBe(updateData.amount)
     expect(response.body.dueDate).toBe(updateData.dueDate)
-  });
+  })
+
+  it("deve gerar erro ao editar um pagamento sem valor e data de vencimento", async () => {
+    const updateData = {}
+    const response = await request(app).put(`/payments/update/${mockPayment.id}`).send(updateData)
+    expect(response.status).toBe(400)
+  })
 
   it("deve atualizar apenas o status do pagamento", async () => {
+    const updateStatus = {
+      status: "cancelled"
+    }
+    const response = await request(app).patch(`/payments/updateStatus/${mockPayment.id}`).send(updateStatus)
+    expect(response.status).toBe(200)
+    expect(response.body.status).toBe(updateStatus.status)
+  })
+
+  it("deve atualizar a data de pagamento ao modificar status para 'paid'", async () => {
     const updateStatus = {
       status: "paid"
     }
     const response = await request(app).patch(`/payments/updateStatus/${mockPayment.id}`).send(updateStatus)
     expect(response.status).toBe(200)
     expect(response.body.status).toBe(updateStatus.status)
+    expect(response.body).toHaveProperty("paymentDate")
   })
 })

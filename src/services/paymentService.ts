@@ -65,6 +65,9 @@ export class PaymentService {
     if (index === -1) {
       throw new Error("Pagamento não encontrado")
     }
+    if (status === PaymentStatus.PAID) {
+      payments[index].paymentDate = formattedDate
+    }
     payments[index].status = status
     payments[index].updatedDate = formattedDate
     await writePayments(payments)

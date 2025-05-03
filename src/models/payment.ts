@@ -11,6 +11,6 @@ export interface Payment {
   status: PaymentStatus
   createdDate: string
   updatedDate: string
-  dueDate: string | null
+  dueDate: string
   paymentDate: string | null
 }
