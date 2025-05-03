@@ -4,6 +4,7 @@ import { createPaymentSchema } from "../schemas/createPaymentSchema";
 import { updatePaymentSchema } from "../schemas/updatePaymentSchema";
 import { z } from "zod";
 import { updatePaymentStatusSchema } from "../schemas/updatePaymentStatusSchema";
+import { paymentCreated, paymentUpdated } from "../events/notification/paymentNotification";
 
 const paymentService = new PaymentService();
 
@@ -26,6 +27,7 @@ export class PaymentController {
     try {
       const paymentData = createPaymentSchema.parse(req.body)
       const payment = await paymentService.create(paymentData);
+      paymentCreated(payment)
       return res.status(201).json(payment);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -38,7 +40,8 @@ export class PaymentController {
   async update(req: Request, res: Response) {
     try {
       const paymentData = updatePaymentSchema.parse(req.body)
-      const payment = await paymentService.update(req.params.id, paymentData);
+      const payment = await paymentService.update(req.params.id, paymentData)
+      paymentUpdated(payment)
       return res.status(200).json(payment);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -52,6 +55,7 @@ export class PaymentController {
     try {
       const paymentData = updatePaymentStatusSchema.parse(req.body)
       const payment = await paymentService.updateStatus(req.params.id, paymentData.status);
+      paymentUpdated(payment)
       return res.status(200).json(payment);
     } catch (error) {
       if (error instanceof z.ZodError) {
