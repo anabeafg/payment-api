@@ -48,6 +48,7 @@ export class PaymentController {
         res.status(400).json({ errors: error.errors })
         return;
       }
+      return res.status(404).json({ error: (error as Error).message })
     }
   }
 
@@ -62,6 +63,7 @@ export class PaymentController {
         res.status(400).json({ errors: error.errors })
         return;
       }
+      return res.status(404).json({ error: (error as Error).message })
     }
   }
 }

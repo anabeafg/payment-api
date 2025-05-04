@@ -55,7 +55,7 @@ describe("PaymentService", () => {
   });
 
   it("deve atualizar um pagamento", async () => {
-    const payment = { id: "123", amount: 100, status: PaymentStatus.PENDING}
+    const payment = { id: "123", amount: 100, status: PaymentStatus.PENDING }
     mockedRead.mockResolvedValue([payment])
     mockedWrite.mockResolvedValue(undefined)
 

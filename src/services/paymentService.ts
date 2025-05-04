@@ -1,11 +1,9 @@
 import { Payment, PaymentStatus } from "../models/payment"
 import { readPayments, writePayments } from "../utils/fileHandler"
 import { v4 as uuidv4 } from "uuid"
-import { toBrasiliaISOString } from "../utils/formatDate"
+import { formatDate, formatDueDate } from "../utils/formatDate"
 import { CreatePaymentDTO } from "../dtos/createPaymentDTO"
 import { UpdatePaymentDTO } from "../dtos/updatePaymentDTO"
-
-const formattedDate = toBrasiliaISOString()
 
 export class PaymentService {
   async list(): Promise<Payment[]> {
@@ -27,6 +25,7 @@ export class PaymentService {
   }
 
   async create(paymentData: CreatePaymentDTO): Promise<Payment> {
+    const formattedDate = formatDate()
     const payments = await readPayments();
     const newPayment: Payment = {
       id: uuidv4(),
@@ -34,7 +33,7 @@ export class PaymentService {
       status: PaymentStatus.PENDING,
       createdDate: formattedDate,
       updatedDate: formattedDate,
-      dueDate: toBrasiliaISOString(new Date(paymentData.dueDate)),
+      dueDate: formatDueDate(paymentData.dueDate),
       paymentDate: null,
     }
 
@@ -44,15 +43,19 @@ export class PaymentService {
   }
 
   async update(id: string, data: UpdatePaymentDTO): Promise<Payment> {
+    const formattedDate = formatDate()
     const payments = await readPayments()
     const index = payments.findIndex(p => p.id === id)
+    const dueDate = data.dueDate ? formatDueDate(data.dueDate!) : payments[index]?.dueDate
+
     if (index === -1) {
-      throw new Error("Pagamento não encontrado")
+      throw new Error("Pagamento não encontrado");
     }
     const updated = {
       ...payments[index],
       ...data,
       updatedDate: formattedDate,
+      dueDate: dueDate!
     };
     payments[index] = updated
     await writePayments(payments)
@@ -60,6 +63,7 @@ export class PaymentService {
   }
 
   async updateStatus(id: string, status: PaymentStatus): Promise<Payment> {
+    const formattedDate = formatDate()
     const payments = await readPayments()
     const index = payments.findIndex(p => p.id === id)
     if (index === -1) {
@@ -68,9 +72,13 @@ export class PaymentService {
     if (status === PaymentStatus.PAID) {
       payments[index].paymentDate = formattedDate
     }
-    payments[index].status = status
-    payments[index].updatedDate = formattedDate
+    const updated = {
+      ...payments[index],
+      status,
+      updatedDate: formattedDate
+    }
+    payments[index] = updated
     await writePayments(payments)
-    return payments[index]
+    return updated
   }
 }
