@@ -72,7 +72,7 @@ URL gerada automaticamente no terminal.
 
 Importe a collection:
 
-> [Download da Collection Postman](#https://.postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
+> [Download da Collection Postman](https://.postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
 
 ---
 
@@ -126,6 +126,11 @@ Importe a collection:
 
 - Simula eventos de notificação na criação e atualização de pagamentos, similar ao funcionamento de sistemas como SNS.
 
+### ✅ Estrutura do objeto 'Payment'
+
+- Por padrão, ao criar um novo registro, dados como: Id, createdDate e updatedDate serão gerados automaticamente pelo sistema. PaymentDate permanecerá null até que o status do pagamento seja alterado para 'paid' via UpdateStatus
+- O dueDate é gerado via requisição no método de create, podendo ser atualizado posteriormente via método update
+- UpdatedDate será modificado automaticamente quando o registro vier a ser atualizado via método update ou updateStatus
 ---
 
 ## 🧪 Testes
