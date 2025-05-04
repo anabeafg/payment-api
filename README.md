@@ -55,7 +55,7 @@ A aplicação estará disponível em: [http://localhost:3000](http://localhost:3
 
 ### 5. Acesse a documentação Swagger
 
-A URL será exibida no terminal ao rodar o servidor. Acesse para explorar os endpoints da API diretamente no navegador. Lá contém exemplos de request e response dos métodos. 
+A URL será exibida no terminal ao rodar o servidor. Acesse para explorar os endpoints da API diretamente no navegador. Lá contém exemplos de request e response dos métodos.
 
 ---
 
@@ -66,7 +66,7 @@ Você pode testar os endpoints de duas formas:
 ### ✅ 1. Via Swagger
 
 URL será gerada automaticamente no terminal após iniciar a execução. Suporta o envio de requisições para todos os métodos da payment-api.
-Tambem pode ser acessada via url abaixo após rodar a aplicação:
+Tambem pode ser acessada via url a seguir após rodar a aplicação:
 [http://localhost:3000/swagger](http://localhost:3000/swagger)
 
 ### ✅ 2. Via Postman
@@ -81,27 +81,27 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 
 ### Interface `Payment`
 
-| Campo         | Tipo      | Descrição                                                                 |
-|---------------|-----------|---------------------------------------------------------------------------|
-| id            | string    | Identificador único gerado automaticamente                                |
-| amount        | number    | Valor do pagamento                                                        |
-| status        | string    | `"pending"`, `"paid"`, `"cancelled"`, `"overdue"`                         |
-| createdDate   | string    | Data de criação (gerada automaticamente em UTC-3)                         |
-| updatedDate   | string    | Data da última atualização (UTC-3)                                        |
-| dueDate       | string    | Data de vencimento                                                        |
-| paymentDate   | string    | Data de pagamento (preenchida automaticamente ao definir status como paid)|
+| Campo       | Tipo   | Descrição                                                                  |
+| ----------- | ------ | -------------------------------------------------------------------------- |
+| id          | string | Identificador único gerado automaticamente                                 |
+| amount      | number | Valor do pagamento                                                         |
+| status      | string | `"pending"`, `"paid"`, `"cancelled"`, `"overdue"`                          |
+| createdDate | string | Data de criação (gerada automaticamente em UTC-3)                          |
+| updatedDate | string | Data da última atualização (UTC-3)                                         |
+| dueDate     | string | Data de vencimento                                                         |
+| paymentDate | string | Data de pagamento (preenchida automaticamente ao definir status como paid) |
 
 ---
 
 ## 📌 Rotas Disponíveis
 
-| Método  | Rota                            | Descrição                                                       |
-|---------|----------------------------------|-----------------------------------------------------------------|
-| `POST`  | `/payment/create`              | Cria um novo pagamento                                          |
-| `GET`   | `/payment/list`                | Lista todos os pagamentos criados                              |
-| `GET`   | `/payment/list/:id`            | Busca um pagamento por ID                                       |
-| `PUT`   | `/payment/update/:id`          | Atualiza `amount` e/ou `dueDate` com base no ID                 |
-| `PATCH` | `/payment/updateStatus/:id`    | Atualiza o `status` de um pagamento com base no ID             |
+| Método  | Rota                        | Descrição                                          |
+| ------- | --------------------------- | -------------------------------------------------- |
+| `POST`  | `/payment/create`           | Cria um novo pagamento                             |
+| `GET`   | `/payment/list`             | Lista todos os pagamentos criados                  |
+| `GET`   | `/payment/list/:id`         | Busca um pagamento por ID                          |
+| `PUT`   | `/payment/update/:id`       | Atualiza `amount` e/ou `dueDate` com base no ID    |
+| `PATCH` | `/payment/updateStatus/:id` | Atualiza o `status` de um pagamento com base no ID |
 
 ---
 
@@ -132,6 +132,7 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 - Por padrão, ao criar um novo registro, dados como: Id, createdDate e updatedDate serão gerados automaticamente pelo sistema. PaymentDate permanecerá null até que o status do pagamento seja alterado para 'paid' via UpdateStatus
 - O dueDate é gerado via requisição no método de create, podendo ser atualizado posteriormente via método update
 - UpdatedDate será modificado automaticamente quando o registro vier a ser atualizado via método update ou updateStatus
+
 ---
 
 ## 🧪 Testes
@@ -153,6 +154,10 @@ yarn test:integration
 ## ❗ Observações
 
 - A aplicação **sempre será executada na porta 3000**, mesmo se você definir outra no `.env`.
+- Para os testes via Swagger e Postman **não necessita autenticação**
+- Para as requisições que solicitam envio de data, pode ser enviado de duas maneiras:
+  - "dueDate": "2025-05-04T14:07:43.277Z"
+  - "dueDate": "2025-05-04" (dessa maneira, o horario será salvo como 00:00:00)
 - O arquivo `payments.json` será gerado automaticamente ao rodar a aplicação.
 - O teste de integração possui uma lógica para limpar o arquivo `payments.json` quando o teste finalizar.
 - Datas e horários seguem o padrão UTC-3.
