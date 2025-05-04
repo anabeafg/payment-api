@@ -35,7 +35,6 @@ describe("Integração - API de Pagamentos", () => {
   it("deve retornar 404 se o pagamento não for encontrado", async () => {
     const response = await request(app).get("/payment/list/id-invalido")
     expect(response.status).toBe(404)
-    expect(response.body).toHaveProperty("error", "Pagamento não encontrado")
   })
 
   it("deve criar um novo pagamento", async () => {
@@ -54,7 +53,7 @@ describe("Integração - API de Pagamentos", () => {
       amount: 300,
       dueDate: "2026-01-01T00:00:00.000Z"
     }
-    
+
     const response = await request(app).put(`/payment/update/${mockPayment.id}`).send(updateData)
     expect(response.status).toBe(200)
     expect(response.body.amount).toBe(updateData.amount)

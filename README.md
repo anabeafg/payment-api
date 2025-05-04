@@ -115,9 +115,10 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 
 - Usado para garantir validação de dados recebidos nos endpoints.
 
-### ✅ Middleware de Validação de JSON
+### ✅ Middlewares para validação de erros e Json
 
 - Garante que apenas requisições com JSON válido sejam aceitas.
+- Captura e centraliza o tratamento de erros ocorridos durante o processamento das requisições.
 
 ### ✅ Fuso Horário UTC-3
 
@@ -153,7 +154,7 @@ yarn test:integration
 
 ## ❗ Observações
 
-- A aplicação **sempre será executada na porta 3000**, mesmo se você definir outra no `.env`.
+- A aplicação **sempre será executada na porta 3000**, exceto se você definir outra no `.env`.
 - Para os testes via Swagger e Postman **não necessita autenticação**
 - Para as requisições que solicitam envio de data, pode ser enviado de duas maneiras:
   - "dueDate": "2025-05-04T14:07:43.277Z"
