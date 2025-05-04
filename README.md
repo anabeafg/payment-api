@@ -161,3 +161,10 @@ yarn test:integration
   - Utilização de eventos em aplicações Node.js com TypeScript.
   - Formatação de datas para o fuso horário **UTC-3**.
   - Escrita e refinamento de validações com **Zod**, especialmente para campos de data.
+
+---
+
+## Licença
+
+Este projeto está licenciado sob os termos da [MIT License](./LICENSE).  
+**Nota:** Este código foi desenvolvido como parte de um desafio técnico. Não é permitido reutilizá-lo ou distribuí-lo como solução própria.
