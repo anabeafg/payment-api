@@ -1,4 +1,4 @@
-# 💳 Payment-API
+# 💵 Payment-API
 
 API RESTful para gerenciamento de pagamentos. Permite criar, listar, buscar, atualizar dados e status de pagamentos, além de simular notificações de eventos. Projetada com foco em simplicidade, rastreabilidade e controle de status de cobranças.
 
@@ -36,7 +36,7 @@ npm install -g yarn
 
 ```bash
 git clone https://github.com/anabeafg/payment-api.git
-cd Payment-API
+cd payment-api
 ```
 
 ### 3. Instale as dependências
@@ -55,25 +55,27 @@ A aplicação estará disponível em: [http://localhost:3000](http://localhost:3
 
 ### 5. Acesse a documentação Swagger
 
-A URL será exibida no terminal ao rodar o servidor. Acesse para explorar os endpoints da API diretamente no navegador. Tambem pode ser acessada via url abaixo após rodar a aplicação:
-[http://localhost:3000/swagger](http://localhost:3000/swagger)
+A URL será exibida no terminal ao rodar o servidor. Acesse para explorar os endpoints da API diretamente no navegador. Lá contém exemplos de request e response dos métodos. 
 
 ---
 
 ## 🧪 Testando os Endpoints
 
-Você pode testar os endpoints de três formas:
+Você pode testar os endpoints de duas formas:
 
 ### ✅ 1. Via Swagger
 
-URL gerada automaticamente no terminal.
+URL será gerada automaticamente no terminal após iniciar a execução. Suporta o envio de requisições para todos os métodos da payment-api.
+Tambem pode ser acessada via url abaixo após rodar a aplicação:
+[http://localhost:3000/swagger](http://localhost:3000/swagger)
 
 ### ✅ 2. Via Postman
 
-Importe a collection:
+Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop:
 
-> [Download da Collection Postman](https://.postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
+> [Clique para acessar a Collection Postman](https://postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
 
+Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params.
 ---
 
 ## 📂 Estrutura da API
@@ -96,11 +98,11 @@ Importe a collection:
 
 | Método  | Rota                            | Descrição                                                       |
 |---------|----------------------------------|-----------------------------------------------------------------|
-| `POST`  | `/payments/create`              | Cria um novo pagamento                                          |
-| `GET`   | `/payments/list`                | Lista todos os pagamentos criados                              |
-| `GET`   | `/payments/list/:id`            | Busca um pagamento por ID                                       |
-| `PUT`   | `/payments/update/:id`          | Atualiza `amount` e/ou `dueDate` com base no ID                 |
-| `PATCH` | `/payments/updateStatus/:id`    | Atualiza o `status` de um pagamento com base no ID             |
+| `POST`  | `/payment/create`              | Cria um novo pagamento                                          |
+| `GET`   | `/payment/list`                | Lista todos os pagamentos criados                              |
+| `GET`   | `/payment/list/:id`            | Busca um pagamento por ID                                       |
+| `PUT`   | `/payment/update/:id`          | Atualiza `amount` e/ou `dueDate` com base no ID                 |
+| `PATCH` | `/payment/updateStatus/:id`    | Atualiza o `status` de um pagamento com base no ID             |
 
 ---
 
@@ -124,9 +126,9 @@ Importe a collection:
 
 ### ✅ Simulação de Eventos
 
-- Simula eventos de notificação na criação e atualização de pagamentos, similar ao funcionamento de sistemas como SNS.
+- Simula eventos de notificação nos momentos de criação e atualização de pagamentos, seguindo o modelo de publicação e assinatura, similar ao funcionamento do Amazon SNS (Simple Notification Service).
 
-### ✅ Estrutura do objeto 'Payment'
+### ✅ Estrutura do Objeto 'Payment'
 
 - Por padrão, ao criar um novo registro, dados como: Id, createdDate e updatedDate serão gerados automaticamente pelo sistema. PaymentDate permanecerá null até que o status do pagamento seja alterado para 'paid' via UpdateStatus
 - O dueDate é gerado via requisição no método de create, podendo ser atualizado posteriormente via método update
@@ -153,4 +155,9 @@ yarn test:integration
 
 - A aplicação **sempre será executada na porta 3000**, mesmo se você definir outra no `.env`.
 - O arquivo `payments.json` será gerado automaticamente ao rodar a aplicação.
+- O teste de integração possui uma lógica para limpar o arquivo `payments.json` quando o teste finalizar.
 - Datas e horários seguem o padrão UTC-3.
+- A IA foi solicitada em momentos como:
+   Como utilizar eventos em aplicações nodejs e typescript
+   Como formatar data atual para que atenda UTC -3 em typescript
+   Auxilio na escrita de validações com Zod, especialmente ao refinar validação em determinados campos de data

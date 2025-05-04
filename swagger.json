@@ -6,7 +6,7 @@
     "description": "API RESTful para gerenciamento de pagamentos."
   },
   "paths": {
-    "/payments/create": {
+    "/payment/create": {
       "post": {
         "summary": "Criar novo pagamento",
         "requestBody": {
@@ -36,7 +36,7 @@
         }
       }
     },
-    "/payments/list": {
+    "/payment/list": {
       "get": {
         "summary": "Listar todos os pagamentos",
         "responses": {
@@ -54,7 +54,7 @@
         }
       } 
     },
-    "/payments/list/{id}": {
+    "/payment/list/{id}": {
       "get": {
         "summary": "Obter pagamento por ID",
         "parameters": [
@@ -66,7 +66,7 @@
         }
       }
     },
-    "/payments/update/{id}": {
+    "/payment/update/{id}": {
       "put": {
         "summary": "Editar pagamento",
         "parameters": [
@@ -92,7 +92,7 @@
         }
       }
     },
-    "/payments/updateStatus/{id}": {
+    "/payment/updateStatus/{id}": {
       "patch": {
         "summary": "Atualizar status do pagamento",
         "parameters": [

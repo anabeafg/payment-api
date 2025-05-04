@@ -24,8 +24,11 @@ export class PaymentController {
   }
 
   async list(req: Request, res: Response) {
-    const payments = await paymentService.list()
-    return res.status(200).json(payments)
+    const payments = await paymentService.list();
+    if (payments.length === 0) {
+      return res.status(200).json({ message: "Não há registros" });
+    }
+    return res.status(200).json(payments);
   }
 
   async getById(req: Request, res: Response) {

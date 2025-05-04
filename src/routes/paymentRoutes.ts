@@ -4,10 +4,10 @@ import { PaymentController } from "../controllers/paymentController"
 const router = Router()
 const controller = new PaymentController()
 
-router.post("/payments/create", controller.create)
-router.get("/payments/list", controller.list)
-router.get("/payments/list/:id", controller.getById)
-router.put("/payments/update/:id", controller.update)
-router.patch("/payments/updateStatus/:id", controller.updateStatus)
+router.post("/payment/create", controller.create)
+router.get("/payment/list", controller.list)
+router.get("/payment/list/:id", controller.getById)
+router.put("/payment/update/:id", controller.update)
+router.patch("/payment/updateStatus/:id", controller.updateStatus)
 
 export default router
