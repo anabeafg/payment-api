@@ -40,7 +40,6 @@ describe("Integração - API de Pagamentos", () => {
   it("deve criar um novo pagamento", async () => {
     const payment = {
       amount: 200,
-      status: "paid",
       dueDate: "2025-12-01T00:00:00.000Z"
     }
     const response = await request(app).post("/payment/create").send(payment)

@@ -71,7 +71,7 @@ Tambem pode ser acessada via url a seguir após rodar a aplicação:
 
 ### ✅ 2. Via Postman
 
-Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop. Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params.
+Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop. Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params. Mas tambem é possível apenas substituindo :id na URL, pelo id desejado.
 
 > [Clique para acessar a Collection Postman](https://www.postman.com/anabea08/payment-api/collection/u8t9g0p/payment-api-collection?action=share&creator=32886418)
 
@@ -109,7 +109,7 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 
 ### ✅ Armazenamento Local com File System
 
-- Os dados são salvos em `payments.json`, criado automaticamente na raiz do projeto.
+- Os dados são salvos em `payments.json`, criado automaticamente na raiz do projeto sempre que executado.
 
 ### ✅ Validações com Zod
 
@@ -119,6 +119,10 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 
 - Garante que apenas requisições com JSON válido sejam aceitas.
 - Captura e centraliza o tratamento de erros ocorridos durante o processamento das requisições.
+
+### ✅ Uso de Princípios SOLID
+
+- A arquitetura da API de pagamentos foi desenvolvida com base nos princípios SOLID, garantindo um código mais modular, legível, testável e de fácil manutenção.
 
 ### ✅ Fuso Horário UTC-3
 
@@ -130,9 +134,11 @@ Acesse a collection disponível abaixo e envie as requisições via Postman Web.
 
 ### ✅ Estrutura do Objeto 'Payment'
 
-- Por padrão, ao criar um novo registro, dados como: Id, createdDate e updatedDate serão gerados automaticamente pelo sistema. PaymentDate permanecerá null até que o status do pagamento seja alterado para 'paid' via UpdateStatus
-- O dueDate é gerado via requisição no método de create, podendo ser atualizado posteriormente via método update
-- UpdatedDate será modificado automaticamente quando o registro vier a ser atualizado via método update ou updateStatus
+- Por padrão, ao criar um novo registro, dados como: Id, CreatedDate e UpdatedDate serão gerados automaticamente pelo sistema. O Status será salvo como 'pending' podendo ser modificado posteriormente via método UpdateStatus
+- PaymentDate permanecerá null até que o Status do pagamento seja alterado para 'paid' via UpdateStatus
+- O DueDate é gerado via requisição no método de create, podendo ser atualizado posteriormente via método update
+- UpdatedDate será modificado automaticamente quando o registro vier a ser atualizado pelo método update ou updateStatus
+- Os registros criados, bem como suas alterações, podem ser acompanhados durante os testes observando o arquivo payments.json localizado na pasta raiz do projeto
 
 ---
 
