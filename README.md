@@ -71,11 +71,11 @@ Tambem pode ser acessada via url abaixo após rodar a aplicação:
 
 ### ✅ 2. Via Postman
 
-Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop:
+Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop. Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params.
 
 > [Clique para acessar a Collection Postman](https://postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
 
-Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params.
+
 ---
 
 ## 📂 Estrutura da API
@@ -157,7 +157,7 @@ yarn test:integration
 - O arquivo `payments.json` será gerado automaticamente ao rodar a aplicação.
 - O teste de integração possui uma lógica para limpar o arquivo `payments.json` quando o teste finalizar.
 - Datas e horários seguem o padrão UTC-3.
-- A IA foi solicitada em momentos como:
-   Como utilizar eventos em aplicações nodejs e typescript
-   Como formatar data atual para que atenda UTC -3 em typescript
-   Auxilio na escrita de validações com Zod, especialmente ao refinar validação em determinados campos de data
+- A IA foi utilizada para apoio nas seguintes implementações:
+  - Utilização de eventos em aplicações Node.js com TypeScript.
+  - Formatação de datas para o fuso horário **UTC-3**.
+  - Escrita e refinamento de validações com **Zod**, especialmente para campos de data.
