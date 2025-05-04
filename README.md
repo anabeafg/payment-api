@@ -73,8 +73,7 @@ Tambem pode ser acessada via url abaixo após rodar a aplicação:
 
 Acesse a collection disponível abaixo e envie as requisições via Postman Web. Ou, se preferir, exporte a collection e abra no seu aplicativo desktop. Nos métodos que passam id na URL (getById, update e updateStatus), indico incluir o id em Path Variables, na aba Params.
 
-> [Clique para acessar a Collection Postman](https://postman.co/workspace/My-Workspace~4f5376e0-753c-4a86-8d18-fa9d17c026ce/collection/32886418-66e451b4-c7a6-470b-9fee-d9d7c9fc93a1?action=share&creator=32886418)
-
+> [Clique para acessar a Collection Postman](https://www.postman.com/anabea08/payment-api/collection/u8t9g0p/payment-api-collection?action=share&creator=32886418)
 
 ---
 

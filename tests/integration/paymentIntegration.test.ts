@@ -54,11 +54,11 @@ describe("Integração - API de Pagamentos", () => {
       amount: 300,
       dueDate: "2026-01-01T00:00:00.000Z"
     }
-    const expectedDueDateLocal = "2025-12-31T21:00:00.000Z";
+    
     const response = await request(app).put(`/payment/update/${mockPayment.id}`).send(updateData)
     expect(response.status).toBe(200)
     expect(response.body.amount).toBe(updateData.amount)
-    expect(response.body.dueDate).toBe(expectedDueDateLocal)
+    expect(response.body.dueDate).toBe(updateData.dueDate)
   })
 
   it("deve gerar erro ao editar um pagamento sem passar valor e data de vencimento", async () => {
