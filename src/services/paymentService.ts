@@ -6,24 +6,6 @@ import { CreatePaymentDTO } from "../dtos/createPaymentDTO"
 import { UpdatePaymentDTO } from "../dtos/updatePaymentDTO"
 
 export class PaymentService {
-  async list(): Promise<Payment[]> {
-    const payments = await readPayments();
-    console.log(payments)
-    if (payments.length === 0) {
-      console.log("Não há registros")
-    }
-    return payments
-  }
-
-  async getById(id: string): Promise<Payment> {
-    const payments = await readPayments();
-    const payment = payments.find(p => p.id === id);
-    if (!payment) {
-      throw new Error("Pagamento não encontrado");
-    }
-    return payment
-  }
-
   async create(paymentData: CreatePaymentDTO): Promise<Payment> {
     const formattedDate = formatDate()
     const payments = await readPayments();
@@ -40,6 +22,24 @@ export class PaymentService {
     payments.push(newPayment);
     await writePayments(payments);
     return newPayment;
+  }
+
+  async list(): Promise<Payment[]> {
+    const payments = await readPayments();
+    console.log(payments)
+    if (payments.length === 0) {
+      console.log("Não há registros")
+    }
+    return payments
+  }
+
+  async getById(id: string): Promise<Payment> {
+    const payments = await readPayments();
+    const payment = payments.find(p => p.id === id);
+    if (!payment) {
+      throw new Error("Pagamento não encontrado");
+    }
+    return payment
   }
 
   async update(id: string, data: UpdatePaymentDTO): Promise<Payment> {
